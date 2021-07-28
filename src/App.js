@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import Sidebar from './components/Sidebar/Sidebar';
+import Chat from "./components/Chat/Chat"
+import Routes from './components/Routes';
+import { useEffect, useState } from 'react';
+import Pusher from 'pusher-js';
+import instance from './store/action/instance';
+import { response } from 'express';
 function App() {
+  const [messages, setMessages] = useState({})
+
+  useEffect(() => {
+    instance.get("/messages/sync").then((response) => {
+      setMessages(response.data)
+    })
+  }, [])
+
+
+  // useEffect(() => {
+  //   const pusher = new Pusher('4af99bfc517011b518e0', {
+  //     cluster: 'eu'
+  //   });
+
+  //   const channel = pusher.subscribe('messages');
+  //   channel.bind('inserted', (newMessage) => {
+  //     setMessages([...messages, newMessage])
+  //   });
+
+  //   return () => {
+  //     channel.unbind_all()
+  //     channel.unsubscribe()
+  //   }
+
+  // }, [messages])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="app_body">
+        {/* <Routes /> */}
+        {/* <Sidebar />
+        <Chat/> */}
+        eraa
+      </div>
     </div>
   );
 }
