@@ -2,7 +2,7 @@ import { useState } from "react";
 import ChatItem from "./ChatItem";
 import Searchbar from "./Searchbar";
 import { useSelector } from "react-redux";
-const ChatList = () => {
+const ChatList = ({handleClick}) => {
   const [query, setQuery] = useState("");
   const chats = useSelector((state) => state.chats.chats);
   // let filtered = chats
@@ -10,7 +10,7 @@ const ChatList = () => {
    const chatList= chats.map((chat) => (
       <ChatItem
         chat={chat}
-        
+        handleClick={handleClick}
          key={chat.id}
       />
   

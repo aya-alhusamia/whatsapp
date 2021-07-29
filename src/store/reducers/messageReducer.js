@@ -26,6 +26,14 @@ const messageReducer = (state = initialState, action) => {
                 messages: action.payload,
                 loading: false,
             };
+            // case actionTypes.FETCH_FILTERED_MESSAGE:
+            // const keepMessage = state.messages.filter(
+            //     (message) => message.chatId === action.payload.chatId
+            // );
+            // return {
+            //     ...state,
+            //     messages: keepMessage,
+            // };
         default:
             return state;
     }
