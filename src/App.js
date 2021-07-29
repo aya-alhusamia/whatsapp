@@ -6,15 +6,15 @@ import Routes from './components/Routes';
 import { useEffect, useState } from 'react';
 import Pusher from 'pusher-js';
 import instance from './store/action/instance';
-import { response } from 'express';
-function App() {
-  const [messages, setMessages] = useState({})
 
-  useEffect(() => {
-    instance.get("/messages/sync").then((response) => {
-      setMessages(response.data)
-    })
-  }, [])
+function App() {
+  // const [messages, setMessages] = useState({})
+
+  // useEffect(() => {
+  //   instance.get("/messages/sync").then((response) => {
+  //     setMessages(response.data)
+  //   })
+  // }, [])
 
 
   // useEffect(() => {
@@ -36,10 +36,10 @@ function App() {
   return (
     <div className="app">
       <div className="app_body">
-        {/* <Routes /> */}
+        <Routes />
         {/* <Sidebar />
         <Chat/> */}
-        eraa
+       
       </div>
     </div>
   );
