@@ -1,9 +1,8 @@
-
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteMessage } from "../../store/action/messageActions";
 
-const MessageItem = ({message}) => {
+const MessageItem = ({ message }) => {
   const dispatch = useDispatch();
   return (
     <div>
@@ -13,10 +12,9 @@ const MessageItem = ({message}) => {
       <p>{message.message}</p>
       <p>{message.timestamp} </p>
       <p>{message.user} </p>
-      <button  onClick={() => dispatch(deleteMessage(message.id))}>delete</button>
-       
-    
-     
+      <button onClick={() => dispatch(deleteMessage(message.id))}>
+        delete
+      </button>
     </div>
   );
 };
