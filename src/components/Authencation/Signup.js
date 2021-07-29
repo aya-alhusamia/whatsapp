@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useState } from "react";
 import { AiFillEye, AiFillPhone } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
@@ -10,7 +10,7 @@ import { signup } from "../../store/action/userActions";
 const SignUp = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [pass, setpass] = useState("password");
+  const [pass, setPass] = useState("password");
   const [user, setUser] = useState({
     username: "",
     mobile: "",
@@ -22,7 +22,7 @@ const SignUp = () => {
       [event.target.name]: event.target.value,
     });
   const showPass = () => {
-    pass === "password" ? setpass("text") : setpass("password");
+    pass === "password" ? setPass("text") : setPass("password");
   };
   const handleSubmit = (event) => {
     event.preventDefault();
