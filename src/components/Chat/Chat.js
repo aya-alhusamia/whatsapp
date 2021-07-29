@@ -19,17 +19,17 @@ function Chat() {
     //     received: false,
     //     timestamp:new Date().toISOString().slice(0,10)
     // })
-    const dispatch = useDispatch();
-    const messages = useSelector((state) => state.messages.messages);
+    // const dispatch = useDispatch();
+    // const messages = useSelector((state) => state.messages.messages);
     useEffect(() => {
         setSeed(Math.floor(Math.random() * 5000))
     }, [])
 
-    const sendMessage = async (event) => {
-        event.preventDefault()
-        dispatch(createMessage(input))
+    // const sendMessage = async (event) => {
+    //     event.preventDefault()
+    //     dispatch(createMessage(input))
 
-    }
+    // }
 
     return (
         <div className="chat">
@@ -53,7 +53,7 @@ function Chat() {
                 </div>
             </div>
             <div className="chat_body">
-                {
+                {/* {
                     messages.map((message) => (
                         <p className={`chat_message ${message.received && "chat_receiver"}`}>
                             <span className="chat_name">
@@ -66,7 +66,7 @@ function Chat() {
                             </span>
                         </p>
                     ))
-                }
+                } */}
 
             </div>
             <div className="chat_footer">
@@ -78,7 +78,7 @@ function Chat() {
                         value={input}
                         onChange={(event) => setInput(event.target.value)} />
                     <button
-                        onClick={sendMessage}
+                        // onClick={sendMessage}
                         type="submit">Send a message</button>
                 </form>
                 <MicIcon />

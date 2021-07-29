@@ -5,8 +5,9 @@ import * as actionTypes from "./types";
 export const signup = (userData, history) => async (dispatch) => {
   try {
     const res = await instance.post("/signup", userData);
+    instance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
     dispatch(setUser(res.data.token));
-    history.push("/");
+    history.push("/chats");
   } catch (error) {
     console.log(error.message);
   }
@@ -14,8 +15,9 @@ export const signup = (userData, history) => async (dispatch) => {
 export const signin = (userData, history) => async (dispatch) => {
   try {
     const res = await instance.post("/signin", userData);
+    instance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
     dispatch(setUser(res.data.token));
-    history.push("/");
+    history.push("/chats");
   } catch (error) {
     console.log(error.message);
   }

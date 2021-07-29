@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { AiFillEye } from "react-icons/ai";
+import { AiFillEye, AiFillPhone } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
 import { UserForm } from "../../styles";
@@ -64,7 +64,7 @@ const SignUp = () => {
                   name="mobile"
                 />
                 <span class="input-group-text" id="basic-addon2">
-                  <FiUser size="1.5em" />
+                  <AiFillPhone size="1.5em" />
                 </span>{" "}
               </div>
               <div class="input-group mb-3">

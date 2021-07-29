@@ -5,7 +5,7 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
 import { UserForm } from "../../styles";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { signin } from "../../store/action/userActions";
 const SignIn = () => {
   const history = useHistory();
@@ -79,8 +79,13 @@ const SignIn = () => {
             </UserForm>
           </div>
           <div className="col-4"></div>
+          <p>dont have accout! please sign up  <Link to="/signup" >
+       here
+     </Link></p>
         </div>
+       
       </div>
+     
     </>
   );
 };

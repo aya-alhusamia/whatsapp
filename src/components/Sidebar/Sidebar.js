@@ -5,12 +5,11 @@ import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { SearchOutlined } from '@material-ui/icons';
 import './Sidebar.css'
-import SidebarChat from './SidebarChat';
+
+import ChatList from "./ChatList"
 const Sidebar = () => {
-  const [rooms, setRooms] = useState([])
-  useEffect(() => {
-    //هون حط الاشي تبع الفاير بيس
-  }, [])
+  // const chats = useSelector((state) => state.chats.chats);
+  // const dispatch = useDispatch();
   return (
     <div className="sidebar">
       <div className="sidebar_header">
@@ -19,8 +18,8 @@ const Sidebar = () => {
           <IconButton>
             <DonutLargeIcon />
           </IconButton>
-          <IconButton>
-            <ChatIcon />
+          <IconButton onClick={()=>prompt("hii")}> 
+            <ChatIcon  />
           </IconButton>
           <IconButton>
             <MoreVertIcon />
@@ -35,12 +34,8 @@ const Sidebar = () => {
 
       </div>
       <div className="sidebar_chats">
-        <SidebarChat addNewChat />
-        {/* {
-          rooms.map(room => {
-            <SidebarChat key={room.id} id={room.id} name={room.name} />
-          })
-        } */}
+        {/* <SidebarChat addNewChat /> */}
+       <ChatList/>
       </div>
     </div>
   );
