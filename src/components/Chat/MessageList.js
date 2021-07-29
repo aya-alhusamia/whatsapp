@@ -1,21 +1,22 @@
 import { useState } from "react";
 import MessageItem from "./MessageItem";
-import { useSelector } from "react-redux";
 
-const MessageList = () => {
-  const [query, setQuery] = useState("");
 
-  const messages = useSelector((state) => state.messages.messages);
+const MessageList = (messages,id) => {
+  // const [query, setQuery] = useState("");
 
+  console.log(messages)
+  console.log(id)
   let filtered = messages
     .filter((message) =>
-      message.name.toUpperCase().includes(query.toUpperCase())
+      message.chatId=== id
     )
-    .map((message) => <MessageItem message={message} key={message.id} />);
+    //;
+  console.log(filtered)
   return (
-    <>
-      <div>{filtered}</div>
-    </>
+    
+    filtered
+    
   );
 };
 

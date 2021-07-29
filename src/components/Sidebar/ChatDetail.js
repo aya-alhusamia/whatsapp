@@ -9,7 +9,9 @@ const ChatDetail = () => {
   console.log(useParams().chatId);
   
   const chats = useSelector((state) => state.chats.chats);
-  const chat = chats.find((chat) => chat.id === +chatId);
+  console.log("hello" ,chats)
+  const chat = chats.find((chat) => chat.id === chatId);
+  console.log(chat)
   if (!chat) return <Redirect to="/" />;
 
   return (
