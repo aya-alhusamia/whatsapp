@@ -11,7 +11,7 @@ import "./Chat.css";
 import { useSelector, useDispatch } from "react-redux";
 import { createMessage } from "../../store/action/messageActions";
 import MessageList from "./MessageList";
-function Chat() {
+function Chat({ filtered }) {
   const [seed, setSeed] = useState("");
   const [input, setInput] = useState({
     message: "",
@@ -19,6 +19,7 @@ function Chat() {
     received: false,
     timestamp: new Date().toISOString().slice(0, 10),
   });
+  console.log(filtered);
   // const [newMessage , setNewMessage ] = useState({
   //     message: "",
   //     name: "",
@@ -58,7 +59,13 @@ function Chat() {
         </div>
       </div>
       <div className="chat_body">
-        <MessageList />
+        {filtered.map((message) => (
+          <p className={`chat_message ${message.received && "chat_receiver"}`}>
+            <span className="chat_name">{message.name}</span>
+            {message.message}
+            <span className="chat_timestamp">{message.timestamp}</span>
+          </p>
+        ))}
       </div>
       <div className="chat_footer">
         <InsertEmoticon />
@@ -66,7 +73,7 @@ function Chat() {
           <input
             placeholder="Type a message"
             type="text"
-            value={input}
+            value={input.message}
             onChange={(event) => setInput(event.target.value)}
           />
           <button

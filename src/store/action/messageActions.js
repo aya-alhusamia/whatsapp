@@ -49,3 +49,16 @@ export const fetchMessages = () => {
     }
   };
 };
+// export const fetchFilteredMessages = () => {
+//   return async (dispatch) => {
+//     try {
+//       const res = await instance.get(`/messages/${chatId}`);
+//       dispatch({
+//         type: actionTypes.FETCH_FILTERED_MESSAGE,
+//         payload: res.data,
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };

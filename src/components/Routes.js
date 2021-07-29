@@ -23,6 +23,7 @@ function Routes() {
       </Route>
       <Route path="/chats">
         <Sidebar />
+      
       </Route>
 
       <Route exact path="/">

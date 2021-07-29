@@ -3,7 +3,13 @@
     display: flex;
     flex-direction: column;
 }
-
+.sidebar_rabber{
+    display: flex;
+    flex-direction: column
+}
+.sidebar_container{
+    display: flex;
+}
 .sidebar_header{
 display: flex;
 justify-content: space-between;
