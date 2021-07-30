@@ -9,7 +9,7 @@ import MicIcon from "@material-ui/icons/Mic";
 import { useEffect, useState } from "react";
 import "./Chat.css";
 import { useSelector, useDispatch } from "react-redux";
-import { createMessage } from "../../store/action/messageActions";
+import { createMessage, deleteMessage } from "../../store/action/messageActions";
 
 function Chat({ filtered }) {
   const users = useSelector((state) => state.user.user);
@@ -25,6 +25,7 @@ function Chat({ filtered }) {
     timestamp: new Date().toISOString().slice(0, 10),
     chatId: id[0],
   });
+ 
 
   const dispatch = useDispatch();
 
@@ -46,7 +47,10 @@ function Chat({ filtered }) {
     dispatch(createMessage(input));
     console.log("hello", filtered.chatId);
   };
-
+const handleDelete=(event)=>{dispatch(deleteMessage(input.message))
+console.log("first input",input)
+console.log("second", input.message);
+}
   return (
     <div className="chat">
       <div className="chat_header">
@@ -73,7 +77,9 @@ function Chat({ filtered }) {
             <span className="chat_name">{message.name}</span>
             {message.message}
             <span className="chat_timestamp">{message.timestamp}</span>
+            <button onClick={handleDelete}> delete</button>
           </p>
+         
         ))}
       </div>
       <div className="chat_footer">
