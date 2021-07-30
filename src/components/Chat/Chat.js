@@ -10,24 +10,24 @@ import { useEffect, useState } from "react";
 import "./Chat.css";
 import { useSelector, useDispatch } from "react-redux";
 import { createMessage } from "../../store/action/messageActions";
-import MessageList from "./MessageList";
+
 function Chat({ filtered }) {
+  const users = useSelector((state) => state.user.user);
+  console.log(users);
+  const id = filtered.map((f) => f.chatId);
+  console.log(filtered);
   const [seed, setSeed] = useState("");
+
   const [input, setInput] = useState({
     message: "",
-    name: "",
-    received: false,
+    name: users.username,
+    received: true,
     timestamp: new Date().toISOString().slice(0, 10),
+    chatId: id[0],
   });
-  console.log(filtered);
-  // const [newMessage , setNewMessage ] = useState({
-  //     message: "",
-  //     name: "",
-  //     received: false,
-  //     timestamp:new Date().toISOString().slice(0,10)
-  // })
-  // const dispatch = useDispatch();
-  // const messages = useSelector((state) => state.messages.messages);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
@@ -37,13 +37,22 @@ function Chat({ filtered }) {
   //     dispatch(createMessage(input))
 
   // }
+  const handleChange = (event) => {
+    setInput({ ...input, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createMessage(input));
+    console.log("hello", filtered.chatId);
+  };
 
   return (
     <div className="chat">
       <div className="chat_header">
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <div className="chat_headerInfo">
-          <h3>Room name</h3>
+          <h3>{filtered[0].name}</h3>
           <p>Last Seen at ....</p>
         </div>
         <div className="chat_headerRight">
@@ -69,12 +78,13 @@ function Chat({ filtered }) {
       </div>
       <div className="chat_footer">
         <InsertEmoticon />
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
+            onChange={handleChange}
             placeholder="Type a message"
             type="text"
+            name="message"
             value={input.message}
-            onChange={(event) => setInput(event.target.value)}
           />
           <button
             // onClick={sendMessage}
