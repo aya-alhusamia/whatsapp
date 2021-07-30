@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMessage } from "../../store/action/messageActions";
+
 import { deleteChat } from "../../store/action/chatActions";
 import { useState } from "react";
-import MessageList from "../Chat/MessageList";
-const ChatItem = ({ chat, addNewChat,handleClick }) => {
- 
-const [filtered,setFiltered]=useState([])
+
+const ChatItem = ({ chat, addNewChat, handleClick }) => {
+  const [filtered, setFiltered] = useState([]);
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.messages.messages);
   const createChat = () => {
@@ -16,12 +14,17 @@ const [filtered,setFiltered]=useState([])
     }
   };
 
-
   return !addNewChat ? (
     <div className="sidebarChat">
       <img src={chat.image} />
       <div className="sidebarChat_info">
-        <h1 onClick={()=>{handleClick(chat.id)}}>{chat.name}</h1>
+        <h1
+          onClick={() => {
+            handleClick(chat.id);
+          }}
+        >
+          {chat.name}
+        </h1>
         <p>Last message .....</p>
       </div>
       {/* <div onClick={createChat} className="sidebarChat">

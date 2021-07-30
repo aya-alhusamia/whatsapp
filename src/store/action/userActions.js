@@ -53,3 +53,20 @@ const setUser = (token) => {
     };
   }
 };
+
+export const fetchUsers = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/fetch");
+      instance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
+
+      console.log("user action here", res.data);
+      dispatch({
+        type: actionTypes.FETCH_USERS,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
