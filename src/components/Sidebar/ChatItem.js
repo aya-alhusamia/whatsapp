@@ -1,10 +1,7 @@
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMessage } from "../../store/action/messageActions";
+
 import { deleteChat } from "../../store/action/chatActions";
 import { useState } from "react";
-import MessageList from "../Chat/MessageList";
-import ModalChat from "./Modal";
 
 const ChatItem = ({ chat, addNewChat, handleClick }) => {
   const [filtered, setFiltered] = useState([]);
@@ -19,7 +16,7 @@ const ChatItem = ({ chat, addNewChat, handleClick }) => {
 
   return !addNewChat ? (
     <div className="sidebarChat">
-      <img src={chat.image} onClick={<ModalChat />} />
+      <img src={chat.image} />
       <div className="sidebarChat_info">
         <h1
           onClick={() => {

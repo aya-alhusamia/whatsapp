@@ -1,35 +1,39 @@
-import { useEffect, useState } from "react";
-import { Avatar, IconButton, Select } from "@material-ui/core";
+import { useState } from "react";
+import Select from "@material-ui/core/Select";
+import { Avatar, IconButton } from "@material-ui/core";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { SearchOutlined } from "@material-ui/icons";
 import "./Sidebar.css";
 import MessageList from "../Chat/MessageList";
-import { Button, Modal, Form, FormGroup } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import ChatList from "./ChatList";
 import { useDispatch, useSelector } from "react-redux";
 import Chat from "../Chat/Chat";
-import { BiCommentAdd } from "@react-icons/all-files/bi/BiCommentAdd";
+
 import { createChat } from "../../store/action/chatActions";
 
 const Sidebar = () => {
   const [filtered, setFiltered] = useState([]);
+  const [img, setImg] = useState("");
   const messages = useSelector((state) => state.messages.messages);
   const chats = useSelector((state) => state.chats.chats);
   console.log("messages", messages);
-  // const chats = useSelector((state) => state.chats.chats);
-  // const dispatch = useDispatch();
+
   const handleClick = (id) => {
     setFiltered(MessageList(messages, id));
   };
   console.log(filtered);
 
   const [show, setShow] = useState(false);
+
   const [newChat, setNewChat] = useState({
+    name: "",
+    image: "",
     users: [],
   });
-  // const allUsers = chats.map((chat) => chat.name);
+
   const _users = useSelector((state) => state.user.allUsers);
   console.log("users from sidebar", _users);
 
@@ -46,6 +50,11 @@ const Sidebar = () => {
     event.preventDefault();
     dispatch(createChat(newChat));
     handleClose();
+  };
+
+  const handleImage = (event) => {
+    setImg(URL.createObjectURL(event.target.files[0]));
+    setNewChat({ ...newChat, image: event.target.files[0] });
   };
 
   const handleChange = (event) => {
@@ -112,15 +121,21 @@ const Sidebar = () => {
             <Modal.Body>
               <Form onSubmit={handleSubmit}>
                 <Form.Label>contact</Form.Label>
+                {console.log(_allUsers, "_allUsers")}
                 <Select
                   isMulti
                   name="users"
-                  options={_allUsers}
+                  value={_allUsers.label}
                   className="basic-multi-select optselect"
                   classNamePrefix="select"
                   onChange={handleChange}
-                  // value={selectedOptions}
-                />
+                >
+                  {_allUsers.map((value) => (
+                    <option key={value.id} value={value.id}>
+                      {value.label}
+                    </option>
+                  ))}
+                </Select>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Group Name</Form.Label>
                   <Form.Control
@@ -129,6 +144,16 @@ const Sidebar = () => {
                     onChange={handleInputChange}
                     placeholder="group name"
                   />
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Chat Image</Form.Label>
+                  <Form.Control
+                    name="image"
+                    type="file"
+                    onChange={handleImage}
+                    placeholder="chat Image"
+                  />
+                  <img src={img} />
                 </Form.Group>
 
                 <Modal.Footer>
