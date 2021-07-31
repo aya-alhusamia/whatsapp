@@ -33,6 +33,7 @@ function Chat({ filtered }) {
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
+  
 
   // const sendMessage = async (event) => {
   //     event.preventDefault()
