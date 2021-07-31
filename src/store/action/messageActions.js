@@ -1,16 +1,15 @@
 import instance from "./instance";
 import * as actionTypes from "./types";
 
-export const deleteMessage = (input, messageId) => {
+export const deleteMessage = ( messageId) => {
   return async (dispatch) => {
     try {
-      const formData = new FormData();
       await instance.delete(`/messages/${messageId}`);
-      for (const key in input) formData.append(key, input[key]);
+
       dispatch({
         type: actionTypes.DELETE_MESSAGE,
         payload: {
-          input: messageId,
+          messageId: messageId,
         },
       });
     } catch (error) {
