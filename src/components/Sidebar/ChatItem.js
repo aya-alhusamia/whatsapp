@@ -31,7 +31,7 @@ const ChatItem = ({ chat, addNewChat, handleClick }) => {
             <h2>Add new Chat</h2>
         </div> */}
 
-      <button onClick={() => dispatch(deleteChat(chat.chat.id))}>delete</button>
+      <button onClick={() => dispatch(deleteChat(chat.id))}>delete</button>
     </div>
   ) : (
     <div onClick={createChat} className="sidebarChat">

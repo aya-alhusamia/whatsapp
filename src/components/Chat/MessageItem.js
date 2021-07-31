@@ -5,13 +5,13 @@ const MessageItem = ({ message }) => {
   const dispatch = useDispatch();
   return (
     <div>
-      <p>{message.message}</p>
-      <p>{message.timestamp} </p>
-      <p>{message.user} </p>
-      <button onClick={() => dispatch(deleteMessage(message.id))}>
-        delete
-      </button>
-    </div>
+     <p className={`chat_message ${message.received && "chat_receiver"}`}>
+     <span className="chat_name">{message.name}</span>
+     {message.message}
+     <span className="chat_timestamp">{message.timestamp}</span>
+     <button onClick={() => dispatch(deleteMessage(message.id))}> delete</button>
+   </p>
+   </div>
   );
 };
 
