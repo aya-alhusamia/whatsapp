@@ -18,6 +18,7 @@ export const fetchChats = () => {
 export const createChat = (newChat) => {
     return async (dispatch) => {
         try {
+            console.log(newChat)
             const formData = new FormData();
             for (const key in newChat) formData.append(key, newChat[key]);
             const res = await instance.post("/chats", formData);

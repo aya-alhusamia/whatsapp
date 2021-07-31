@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Select from "@material-ui/core/Select";
+import Select from "react-select";
 import { Avatar, IconButton } from "@material-ui/core";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -40,7 +40,7 @@ const Sidebar = () => {
   const _allUsers = _users.map((user) => {
     return { value: user.id, label: user.username };
   });
-
+  const outherUsers=_users.filter((_id)=>_id.id !== _users.id)
   const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
@@ -50,6 +50,11 @@ const Sidebar = () => {
     event.preventDefault();
     dispatch(createChat(newChat));
     handleClose();
+     setNewChat({
+      name: "",
+      image: "",
+      users: [],
+     })
   };
 
   const handleImage = (event) => {
@@ -74,7 +79,8 @@ const Sidebar = () => {
 
     console.log(newChat);
   };
-
+ 
+ 
   return (
     <div className="sidebar_container">
       <div className="sidebar_rabber">
@@ -125,7 +131,7 @@ const Sidebar = () => {
                 <Select
                   isMulti
                   name="users"
-                  value={_allUsers.label}
+                  value={_allUsers}
                   className="basic-multi-select optselect"
                   classNamePrefix="select"
                   onChange={handleChange}
