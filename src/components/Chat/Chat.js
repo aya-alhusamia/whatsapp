@@ -1,15 +1,14 @@
 import { Avatar, IconButton } from "@material-ui/core";
-import {
-  AttachFile,
-  InsertEmoticon,
-  MoreVert,
-  SearchOutlined,
-} from "@material-ui/icons";
+import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
+import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { useEffect, useState } from "react";
 import "./Chat.css";
 import { useSelector, useDispatch } from "react-redux";
-import { createMessage, deleteMessage } from "../../store/action/messageActions";
+import {
+  createMessage,
+  deleteMessage,
+} from "../../store/action/messageActions";
 import MessageItem from "./MessageItem";
 
 function Chat({ filtered }) {
@@ -26,14 +25,12 @@ function Chat({ filtered }) {
     timestamp: new Date().toISOString().slice(0, 10),
     chatId: id[0],
   });
- 
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
-  
 
   // const sendMessage = async (event) => {
   //     event.preventDefault()
@@ -49,7 +46,6 @@ function Chat({ filtered }) {
     dispatch(createMessage(input));
     console.log("hello", filtered.chatId);
   };
-
 
   return (
     <div className="chat">
@@ -73,12 +69,11 @@ function Chat({ filtered }) {
       </div>
       <div className="chat_body">
         {filtered.map((message) => (
-         <MessageItem message={message} key={message.id}/>
-         
+          <MessageItem message={message} key={message.id} />
         ))}
       </div>
       <div className="chat_footer">
-        <InsertEmoticon />
+        <InsertEmoticonIcon />
         <form onSubmit={handleSubmit}>
           <input
             onChange={handleChange}
