@@ -45,6 +45,7 @@ export const fetchMessages = () => {
         type: actionTypes.FETCH_MESSAGE,
         payload: res.data,
       });
+      console.log("fetch message" , res.data)
     } catch (error) {
       console.log(error);
     }

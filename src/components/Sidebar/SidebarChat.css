@@ -8,19 +8,30 @@
 .sidebarChat:hover {
   background-color: #ebebeb;
 }
+.sidebarChat >span{
+  height: 49px;
+  width: 49px;
+}
+.sidebarChat >span >img{
+  border-radius: 50%;
+}
 
 .sidebarChat_info {
   margin-left: 15px;
 }
-
-.sidebar_image {
-  height: 49px;
-  width: 49px;
-  border-radius: 50%;
-  opacity: 1;
+.sidebarChat_info > span{
+  display: flex;
+  flex-direction: row;
 }
-
-.sidebarChat_info > h2 {
+.sidebarChat_info>span > h2 {
   font-size: 16px;
   margin-bottom: 8px;
+  padding: 5px;
 }
+
+ 
+.sidebarChat_info>span > .MuiSvgIcon-root   {
+  color: gray;
+  font-size: small;
+ }
+ 

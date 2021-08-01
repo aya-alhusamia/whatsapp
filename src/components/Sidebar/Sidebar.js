@@ -21,7 +21,6 @@ const Sidebar = () => {
   const chats = useSelector((state) => state.chats.chats);
 const  [chatId,setChatId]= useState(chats[0].id)
   const handleClick = (id) => {
-    setFiltered(MessageList(messages, id))
     setChatId(id)
   };
   console.log(filtered);
