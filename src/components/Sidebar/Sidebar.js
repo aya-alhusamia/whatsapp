@@ -19,9 +19,10 @@ const Sidebar = () => {
   const [img, setImg] = useState("");
   const messages = useSelector((state) => state.messages.messages);
   const chats = useSelector((state) => state.chats.chats);
-
+const  [chatId,setChatId]= useState(chats[0].id)
   const handleClick = (id) => {
-    setFiltered(MessageList(messages, id));
+    setFiltered(MessageList(messages, id))
+    setChatId(id)
   };
   console.log(filtered);
 
@@ -123,10 +124,10 @@ const Sidebar = () => {
             backgroundColor: "darkcyan",
           }}
         ></div>
-        {filtered.length > 0 ? (
-          <Chat filtered={filtered} />
-        ) : (
-          // <ModalForm show={show} />
+       
+          <Chat filtered={filtered} chatId={chatId} />
+       
+          {/* <ModalForm show={show} /> */}
           <Modal show={show} onHide={handleClose}>
             <Modal.Title>Create Chat</Modal.Title>
 
@@ -182,7 +183,7 @@ const Sidebar = () => {
               </Form>
             </Modal.Body>
           </Modal>
-        )}
+      
       </div>
     </div>
   );

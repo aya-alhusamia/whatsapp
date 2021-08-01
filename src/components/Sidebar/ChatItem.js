@@ -16,15 +16,16 @@ const ChatItem = ({ chat, addNewChat, handleClick }) => {
 
   return !addNewChat ? (
     <div className="sidebarChat">
-      <img src={chat.image} />
+         <img className="sidebar_image" src={chat.image} />
       <div className="sidebarChat_info">
-        <h1
+ 
+        <h2
           onClick={() => {
             handleClick(chat.id);
           }}
         >
           {chat.name}
-        </h1>
+        </h2>
         <p>Last message .....</p>
       </div>
       {/* <div onClick={createChat} className="sidebarChat">
