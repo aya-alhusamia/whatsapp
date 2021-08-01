@@ -8,8 +8,10 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   createMessage,
   deleteMessage,
+  fetchMessages,
 } from "../../store/action/messageActions";
 import MessageItem from "./MessageItem";
+import MessageList from "./MessageList";
 
 function Chat({ filtered, chatId }) {
   const users = useSelector((state) => state.user.user);
@@ -25,9 +27,18 @@ function Chat({ filtered, chatId }) {
     timestamp: new Date().toISOString().slice(0, 10),
     
   });
-
+ 
   const dispatch = useDispatch();
 
+  useEffect(()=> {
+    console.log("we are here")
+    dispatch(fetchMessages()
+    )
+         
+  
+   }, [input]);
+
+  
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
@@ -41,10 +52,12 @@ function Chat({ filtered, chatId }) {
     event.preventDefault();
     const newMessage= {...input, chatId:chatId}
     dispatch(createMessage(newMessage));
+    setInput({message: ""});
     console.log("hello", filtered.chatId);
   };
 
   return (
+    <div className= "cont">
     <div className="chat">
       <div className="chat_header">
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
@@ -64,10 +77,13 @@ function Chat({ filtered, chatId }) {
           </IconButton>
         </div>
       </div>
-      <div className="chat_body">
+      <div className="body2">
+        <MessageList chatId={chatId}/>
+      {/* <div className="chat_body">
         {filtered.map((message) => (
           <MessageItem message={message} key={message.id} />
         ))}
+      </div> */}
       </div>
       <div className="chat_footer">
         <InsertEmoticonIcon />
@@ -88,6 +104,7 @@ function Chat({ filtered, chatId }) {
         </form>
         <MicIcon />
       </div>
+    </div>
     </div>
   );
 }

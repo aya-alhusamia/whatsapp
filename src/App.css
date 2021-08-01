@@ -43,7 +43,7 @@
   height: 100vh;
 }
 .app_body{
-  
+  flex: 1;
   background-color: #ededed;
   margin-top: -50px;
   height: 90vh;
