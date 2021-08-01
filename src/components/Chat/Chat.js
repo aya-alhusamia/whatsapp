@@ -11,19 +11,19 @@ import {
 } from "../../store/action/messageActions";
 import MessageItem from "./MessageItem";
 
-function Chat({ filtered }) {
+function Chat({ filtered, chatId }) {
   const users = useSelector((state) => state.user.user);
-  console.log(users);
-  const id = filtered.map((f) => f.chatId);
-  console.log(filtered);
+  const chats = useSelector((state) => state.chats.chats);
+  const thisChat =chats.find((chat)=>chat.id === chatId)
+  
   const [seed, setSeed] = useState("");
 
   const [input, setInput] = useState({
     message: "",
-    name: users.username,
+    name: users?.username,
     received: true,
     timestamp: new Date().toISOString().slice(0, 10),
-    chatId: id[0],
+    
   });
 
   const dispatch = useDispatch();
@@ -32,18 +32,15 @@ function Chat({ filtered }) {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
 
-  // const sendMessage = async (event) => {
-  //     event.preventDefault()
-  //     dispatch(createMessage(input))
-
-  // }
+  
   const handleChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createMessage(input));
+    const newMessage= {...input, chatId:chatId}
+    dispatch(createMessage(newMessage));
     console.log("hello", filtered.chatId);
   };
 
@@ -52,7 +49,7 @@ function Chat({ filtered }) {
       <div className="chat_header">
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <div className="chat_headerInfo">
-          <h3>{filtered[0].name}</h3>
+          <h3>{thisChat?.name}</h3>
           <p>Last Seen at ....</p>
         </div>
         <div className="chat_headerRight">
