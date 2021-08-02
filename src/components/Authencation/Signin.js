@@ -27,7 +27,9 @@ const SignIn = () => {
     event.preventDefault();
     dispatch(signin(user, history));
   };
+  // REVIEW: Folder name "Authentication" is misspelled
   return (
+    // REVIEW: Remove fragments. Not neccessary here
     <>
       <div className="container mt-5">
         <div className="row">
@@ -79,13 +81,11 @@ const SignIn = () => {
             </UserForm>
           </div>
           <div className="col-4"></div>
-          <p>dont have accout! please sign up  <Link to="/signup" >
-       here
-     </Link></p>
+          <p>
+            dont have accout! please sign up <Link to="/signup">here</Link>
+          </p>
         </div>
-       
       </div>
-     
     </>
   );
 };

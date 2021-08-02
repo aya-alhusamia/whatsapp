@@ -58,8 +58,9 @@ export const fetchUsers = () => {
   return async (dispatch) => {
     try {
       const res = await instance.get("/fetch");
+      // Why do you need this line here?
       instance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-
+      // REVIEW: Remove extra clgs
       console.log("user action here", res.data);
       dispatch({
         type: actionTypes.FETCH_USERS,

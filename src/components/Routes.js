@@ -8,6 +8,8 @@ import SignIn from "./Authencation/Signin";
 import { Route, Switch } from "react-router";
 import Sidebar from "./Sidebar/Sidebar";
 import MessageList from "./Chat/MessageList";
+// REVIEW: Remove commented out code
+// Organize your imports
 
 function Routes() {
   return (
@@ -18,12 +20,12 @@ function Routes() {
       {/* <Route path="/chats/:chatId">
         <ChatDetail />
       </Route> */}
+      {/* Are you using this route? */}
       <Route path="/messages">
         <MessageList />
       </Route>
       <Route path="/chats">
         <Sidebar />
-      
       </Route>
 
       <Route exact path="/">

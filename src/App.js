@@ -1,12 +1,11 @@
-
-import './App.css';
-import Sidebar from './components/Sidebar/Sidebar';
-import Chat from "./components/Chat/Chat"
-import Routes from './components/Routes';
-import { useEffect, useState } from 'react';
-import Pusher from 'pusher-js';
-import instance from './store/action/instance';
-
+import "./App.css";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Chat from "./components/Chat/Chat";
+import Routes from "./components/Routes";
+import { useEffect, useState } from "react";
+import Pusher from "pusher-js";
+import instance from "./store/action/instance";
+// REVIEW: شو هاظ؟
 function App() {
   // const [messages, setMessages] = useState({})
 
@@ -15,7 +14,6 @@ function App() {
   //     setMessages(response.data)
   //   })
   // }, [])
-
 
   // useEffect(() => {
   //   const pusher = new Pusher('4af99bfc517011b518e0', {
@@ -39,7 +37,6 @@ function App() {
         <Routes />
         {/* <Sidebar />
         <Chat/> */}
-       
       </div>
     </div>
   );

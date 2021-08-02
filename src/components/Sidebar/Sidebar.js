@@ -15,13 +15,14 @@ import Chat from "../Chat/Chat";
 import { createChat } from "../../store/action/chatActions";
 
 const Sidebar = () => {
+  // REVIEW: Remove unused stuff:
   const [filtered, setFiltered] = useState([]);
   const [img, setImg] = useState("");
   const messages = useSelector((state) => state.messages.messages);
   const chats = useSelector((state) => state.chats.chats);
-const  [chatId,setChatId]= useState(chats[0].id)
+  const [chatId, setChatId] = useState(chats[0].id);
   const handleClick = (id) => {
-    setChatId(id)
+    setChatId(id);
   };
   console.log(filtered);
 
@@ -123,66 +124,66 @@ const  [chatId,setChatId]= useState(chats[0].id)
             backgroundColor: "darkcyan",
           }}
         ></div>
-       
-          <Chat filtered={filtered} chatId={chatId} />
-       
-          {/* <ModalForm show={show} /> */}
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Title>Create Chat</Modal.Title>
 
-            <Modal.Body>
-              <Form onSubmit={handleSubmit}>
-                <Form.Label>contact</Form.Label>
-                {console.log(_allUsers, "_allUsers")}
-                <Select
-                  isMulti
-                  name="users"
-                  // value={_allUsers}
-                  options={_allUsers}
-                  className="basic-multi-select optselect"
-                  classNamePrefix="select"
-                  getOptionValue={(option) => option.value}
-                  getOptionLabel={(option) => option.label}
-                  onChange={(event) => handleChange(event)}
-                ></Select>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Group Name</Form.Label>
-                  <Form.Control
-                    name="name"
-                    type="text"
-                    onChange={handleInputChange}
-                    placeholder="group name"
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Chat Image</Form.Label>
-                  <Form.Control
-                    name="image"
-                    type="file"
-                    onChange={handleImage}
-                    placeholder="chat Image"
-                  />
-                  <img src={img} />
-                </Form.Group>
+        <Chat filtered={filtered} chatId={chatId} />
 
-                <Modal.Footer>
-                  <button
-                    className="btn secondary btn-primary"
-                    type="submit"
-                    onClick={handleChange}
-                  >
-                    {" "}
-                    Start a Chat
-                  </button>
+        {/* <ModalForm show={show} /> */}
+        {/* REVIEW: Move modal into its own component */}
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Title>Create Chat</Modal.Title>
 
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Form>
-            </Modal.Body>
-          </Modal>
-      
+          <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+              <Form.Label>contact</Form.Label>
+              {console.log(_allUsers, "_allUsers")}
+              <Select
+                isMulti
+                name="users"
+                // value={_allUsers}
+                options={_allUsers}
+                className="basic-multi-select optselect"
+                classNamePrefix="select"
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                onChange={(event) => handleChange(event)}
+              ></Select>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Group Name</Form.Label>
+                <Form.Control
+                  name="name"
+                  type="text"
+                  onChange={handleInputChange}
+                  placeholder="group name"
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Chat Image</Form.Label>
+                <Form.Control
+                  name="image"
+                  type="file"
+                  onChange={handleImage}
+                  placeholder="chat Image"
+                />
+                <img src={img} />
+              </Form.Group>
+
+              <Modal.Footer>
+                <button
+                  className="btn secondary btn-primary"
+                  type="submit"
+                  onClick={handleChange}
+                >
+                  {" "}
+                  Start a Chat
+                </button>
+
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );

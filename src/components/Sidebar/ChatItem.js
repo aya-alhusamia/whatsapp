@@ -10,7 +10,7 @@ const ChatItem = ({ chat, addNewChat, handleClick }) => {
   const messages = useSelector((state) => state.messages.messages);
   const createChat = () => {
     const roomName = prompt("Please enter name for chat");
-
+    // What does this do?
     if (roomName) {
     }
   };

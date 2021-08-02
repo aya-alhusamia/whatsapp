@@ -18,6 +18,7 @@ export const fetchChats = () => {
 export const createChat = (newChat, users) => {
   return async (dispatch) => {
     try {
+      // REVIEW: Remove clg when done
       console.log("chat action", users);
       const formData = new FormData();
       for (const key in newChat) formData.append(key, newChat[key]);
