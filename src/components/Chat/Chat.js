@@ -1,17 +1,23 @@
-import { Avatar, IconButton } from "@material-ui/core";
-import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
-import MicIcon from "@material-ui/icons/Mic";
-import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { useEffect, useState } from "react";
-import "./Chat.css";
 import { useSelector, useDispatch } from "react-redux";
+
+// Components
+import MessageList from "./MessageList";
+import MessageItem from "./MessageItem";
+
+// Styling
+import "./Chat.css";
+import MicIcon from "@material-ui/icons/Mic";
+import { Avatar, IconButton } from "@material-ui/core";
+import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
+import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
+
+// Actions
 import {
   createMessage,
   deleteMessage,
   fetchMessages,
 } from "../../store/action/messageActions";
-import MessageItem from "./MessageItem";
-import MessageList from "./MessageList";
 
 function Chat({ filtered, chatId }) {
   const users = useSelector((state) => state.user.user);

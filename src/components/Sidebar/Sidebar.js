@@ -124,7 +124,7 @@ const Sidebar = () => {
             backgroundColor: "darkcyan",
           }}
         ></div>
-
+        {/* REVIEW: Remove filtered */}
         <Chat filtered={filtered} chatId={chatId} />
 
         {/* <ModalForm show={show} /> */}

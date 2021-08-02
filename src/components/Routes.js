@@ -1,11 +1,8 @@
-//components
-// import MessageList from "./Message/MessageList";
-// import ChatList from "./Chat/ChatList";
-// import ChatDetail from "./Chat/ChatDetail";
+import { Route, Switch } from "react-router";
+
+// Components
 import SignUp from "./Authencation/Signup";
 import SignIn from "./Authencation/Signin";
-
-import { Route, Switch } from "react-router";
 import Sidebar from "./Sidebar/Sidebar";
 import MessageList from "./Chat/MessageList";
 // REVIEW: Remove commented out code

@@ -10,23 +10,28 @@ import { signin } from "../../store/action/userActions";
 const SignIn = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+
   const [pass, setpass] = useState("password");
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
+
   const handleChange = (event) =>
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
+
   const showPass = () => {
     pass === "password" ? setpass("text") : setpass("password");
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(signin(user, history));
   };
+
   // REVIEW: Folder name "Authentication" is misspelled
   return (
     // REVIEW: Remove fragments. Not neccessary here
