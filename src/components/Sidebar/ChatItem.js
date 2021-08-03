@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-
 //components
 import { deleteChat } from "../../store/action/chatActions";
 
@@ -9,9 +8,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { IconButton } from "@material-ui/core";
 
 const ChatItem = ({ chat, addNewChat, handleClick }) => {
-   const dispatch = useDispatch();
-
-  
+  const dispatch = useDispatch();
 
   return (
     <div className="sidebarChat">
@@ -21,6 +18,7 @@ const ChatItem = ({ chat, addNewChat, handleClick }) => {
       </span>
       <div className="sidebarChat_info">
         <span>
+
           <h2
             onClick={() => {
               handleClick(chat.id);
@@ -36,7 +34,7 @@ const ChatItem = ({ chat, addNewChat, handleClick }) => {
         <p>Last message .....</p>
       </div>
     </div>
-  ) 
+  )
 };
 
 export default ChatItem;
