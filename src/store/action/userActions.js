@@ -1,5 +1,6 @@
-import instance from "./instance";
 import decode from "jwt-decode";
+//Components
+import instance from "./instance";
 import * as actionTypes from "./types";
 
 export const signup = (userData, history) => async (dispatch) => {
@@ -60,7 +61,6 @@ export const fetchUsers = () => {
       const res = await instance.get("/fetch");
       instance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
 
-      console.log("user action here", res.data);
       dispatch({
         type: actionTypes.FETCH_USERS,
         payload: res.data,

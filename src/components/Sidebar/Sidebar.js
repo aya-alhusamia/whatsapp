@@ -1,30 +1,28 @@
-import { useState } from "react";
-import Select from "react-select";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+//Components
+import Chat from "../Chat/Chat";
+import ChatList from "./ChatList";
+
+//Style
 import { Avatar, IconButton } from "@material-ui/core";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { Label, SearchOutlined } from "@material-ui/icons";
-import "./Sidebar.css";
-import MessageList from "../Chat/MessageList";
 import { Button, Modal, Form } from "react-bootstrap";
-import ChatList from "./ChatList";
-import { useDispatch, useSelector } from "react-redux";
-import Chat from "../Chat/Chat";
+import "./Sidebar.css";
 
-import { createChat } from "../../store/action/chatActions";
+//Action
+import { createChat, fetchChats } from "../../store/action/chatActions";
+
+//Form
+import Select from "react-select";
 
 const Sidebar = () => {
-  const [filtered, setFiltered] = useState([]);
+  //UseState
   const [img, setImg] = useState("");
-  const messages = useSelector((state) => state.messages.messages);
-  const chats = useSelector((state) => state.chats.chats);
-const  [chatId,setChatId]= useState(chats[0].id)
-  const handleClick = (id) => {
-    setChatId(id)
-  };
-  console.log(filtered);
-
+  const [chatId, setChatId] = useState(chats[0].id);
   const [show, setShow] = useState(false);
   const [users, setUsers] = useState([]);
   const [newChat, setNewChat] = useState({
@@ -32,26 +30,24 @@ const  [chatId,setChatId]= useState(chats[0].id)
     image: "",
   });
 
+  //UseSelector
+  const messages = useSelector((state) => state.messages.messages);
+  const chats = useSelector((state) => state.chats.chats);
   const _users = useSelector((state) => state.user.allUsers);
-  console.log("users from sidebar", _users);
 
-  // {_users.map((value) => (
-  //   <option
-  //     key={value.id}
-  //     value={value.id}
-  //     name={value.username}
-  //   >
-  //     {value.label}
-  //   </option>
-  // ))}
+  const handleClick = (id) => {
+    setChatId(id);
+  };
 
   const _allUsers = _users.map((user) => {
     return { value: user.id, label: user.username };
   });
-  console.log("allusers from sidebar", _allUsers);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchChats());
+  }, [newChat]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -63,6 +59,8 @@ const  [chatId,setChatId]= useState(chats[0].id)
       name: "",
       image: "",
     });
+
+    dispatch(fetchChats());
     setUsers([]);
   };
 
@@ -82,8 +80,6 @@ const  [chatId,setChatId]= useState(chats[0].id)
       ...newChat,
       [event.target.name]: event.target.value,
     });
-
-    console.log(newChat);
   };
 
   return (
@@ -103,14 +99,7 @@ const  [chatId,setChatId]= useState(chats[0].id)
             </IconButton>
           </div>
         </div>
-        <div className="sidebar_search">
-          <div className="sidebar_searchContainer">
-            <SearchOutlined />
-            <input placeholder="Search or start new chat" type="text" />
-          </div>
-        </div>
         <div className="sidebar_chats">
-          {/* <SidebarChat addNewChat /> */}
           <ChatList handleClick={handleClick} />
         </div>
       </div>
@@ -123,66 +112,63 @@ const  [chatId,setChatId]= useState(chats[0].id)
             backgroundColor: "darkcyan",
           }}
         ></div>
-       
-          <Chat filtered={filtered} chatId={chatId} />
-       
-          {/* <ModalForm show={show} /> */}
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Title>Create Chat</Modal.Title>
 
-            <Modal.Body>
-              <Form onSubmit={handleSubmit}>
-                <Form.Label>contact</Form.Label>
-                {console.log(_allUsers, "_allUsers")}
-                <Select
-                  isMulti
-                  name="users"
-                  // value={_allUsers}
-                  options={_allUsers}
-                  className="basic-multi-select optselect"
-                  classNamePrefix="select"
-                  getOptionValue={(option) => option.value}
-                  getOptionLabel={(option) => option.label}
-                  onChange={(event) => handleChange(event)}
-                ></Select>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Group Name</Form.Label>
-                  <Form.Control
-                    name="name"
-                    type="text"
-                    onChange={handleInputChange}
-                    placeholder="group name"
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Chat Image</Form.Label>
-                  <Form.Control
-                    name="image"
-                    type="file"
-                    onChange={handleImage}
-                    placeholder="chat Image"
-                  />
-                  <img src={img} />
-                </Form.Group>
+        <Chat chatId={chatId} />
 
-                <Modal.Footer>
-                  <button
-                    className="btn secondary btn-primary"
-                    type="submit"
-                    onClick={handleChange}
-                  >
-                    {" "}
-                    Start a Chat
-                  </button>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Title>Create Chat</Modal.Title>
 
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Form>
-            </Modal.Body>
-          </Modal>
-      
+          <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+              <Form.Label>contact</Form.Label>
+
+              <Select
+                isMulti
+                name="users"
+                options={_allUsers}
+                className="basic-multi-select optselect"
+                classNamePrefix="select"
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                onChange={(event) => handleChange(event)}
+              ></Select>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Group Name</Form.Label>
+                <Form.Control
+                  name="name"
+                  type="text"
+                  onChange={handleInputChange}
+                  placeholder="group name"
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Chat Image</Form.Label>
+                <Form.Control
+                  name="image"
+                  type="file"
+                  onChange={handleImage}
+                  placeholder="chat Image"
+                />
+                <img src={img} />
+              </Form.Group>
+
+              <Modal.Footer>
+                <button
+                  className="btn secondary btn-primary"
+                  type="submit"
+                  onClick={handleChange}
+                >
+                  {" "}
+                  Start a Chat
+                </button>
+
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );

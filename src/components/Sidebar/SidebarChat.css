@@ -14,7 +14,10 @@
 }
 .sidebarChat >span >img{
   border-radius: 50%;
+  height: 49px;
+    width: 49px;
 }
+
 
 .sidebarChat_info {
   margin-left: 15px;

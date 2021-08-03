@@ -1,21 +1,19 @@
-import "./SidebarChat.css";
 import { useDispatch, useSelector } from "react-redux";
-import { IconButton } from "@material-ui/core";
+
+//components
 import { deleteChat } from "../../store/action/chatActions";
-import { useState } from "react";
+
+//styling
+import "./SidebarChat.css";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import { IconButton } from "@material-ui/core";
+
 const ChatItem = ({ chat, addNewChat, handleClick }) => {
-  const [filtered, setFiltered] = useState([]);
-  const dispatch = useDispatch();
-  const messages = useSelector((state) => state.messages.messages);
-  const createChat = () => {
-    const roomName = prompt("Please enter name for chat");
+   const dispatch = useDispatch();
 
-    if (roomName) {
-    }
-  };
+  
 
-  return !addNewChat ? (
+  return (
     <div className="sidebarChat">
       <span>
         {" "}
@@ -37,17 +35,8 @@ const ChatItem = ({ chat, addNewChat, handleClick }) => {
         </span>
         <p>Last message .....</p>
       </div>
-      {/* <div onClick={createChat} className="sidebarChat">
-            <h2>Add new Chat</h2>
-        </div> */}
-
-      {/* <button onClick={() => dispatch(deleteChat(chat.id))}>delete</button> */}
     </div>
-  ) : (
-    <div onClick={createChat} className="sidebarChat">
-      <h2>Add new Chat</h2>
-    </div>
-  );
+  ) 
 };
 
 export default ChatItem;

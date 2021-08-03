@@ -1,3 +1,4 @@
+//Components
 import instance from "./instance";
 import * as actionTypes from "./types";
 
@@ -18,7 +19,7 @@ export const fetchChats = () => {
 export const createChat = (newChat, users) => {
   return async (dispatch) => {
     try {
-      console.log("chat action", users);
+   
       const formData = new FormData();
       for (const key in newChat) formData.append(key, newChat[key]);
       formData.append("users", JSON.stringify(users));

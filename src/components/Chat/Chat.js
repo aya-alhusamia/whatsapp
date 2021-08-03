@@ -1,19 +1,21 @@
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+
+//Components
+import {createMessage, fetchMessages} from "../../store/action/messageActions";
+import MessageList from "./MessageList";
+
+//Styling
 import { Avatar, IconButton } from "@material-ui/core";
 import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import { useEffect, useState } from "react";
+import InputEmoji from 'react-input-emoji'
 import "./Chat.css";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  createMessage,
-  deleteMessage,
-  fetchMessages,
-} from "../../store/action/messageActions";
-import MessageItem from "./MessageItem";
-import MessageList from "./MessageList";
 
-function Chat({ filtered, chatId }) {
+
+
+function Chat({  chatId }) {
   const users = useSelector((state) => state.user.user);
   const chats = useSelector((state) => state.chats.chats);
   const thisChat =chats.find((chat)=>chat.id === chatId)
@@ -31,7 +33,7 @@ function Chat({ filtered, chatId }) {
   const dispatch = useDispatch();
 
   useEffect(()=> {
-    console.log("we are here")
+  
     dispatch(fetchMessages()
     )
          
@@ -46,16 +48,26 @@ function Chat({ filtered, chatId }) {
   
   const handleChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value });
+    
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newMessage= {...input, chatId:chatId}
     dispatch(createMessage(newMessage));
-    setInput({message: ""});
-    console.log("hello", filtered.chatId);
-  };
+    setInput({...input, message: ""});
+    dispatch(fetchMessages())
+   
 
+    
+  };
+const handleEnter=()=>{
+dispatch(createMessage({input}))
+  // setInput({...input,message:"message"})
+}
+const handleAttachment=(event)=>{
+dispatch(createMessage({...input,message:event.target.files[0]}))
+}
   return (
     <div className= "cont">
     <div className="chat">
@@ -70,7 +82,12 @@ function Chat({ filtered, chatId }) {
             <SearchOutlined />
           </IconButton>
           <IconButton>
-            <AttachFile />
+            <div  >
+            <form onSubmit= {handleSubmit}>
+              <input  onChange={handleAttachment} type="file" name="image"   style={{display:"none"}}/>
+            <AttachFile  />
+            </form>
+            </div>
           </IconButton>
           <IconButton>
             <MoreVert />
@@ -85,24 +102,37 @@ function Chat({ filtered, chatId }) {
         ))}
       </div> */}
       </div>
-      <div className="chat_footer">
-        <InsertEmoticonIcon />
-        <form onSubmit={handleSubmit}>
-          <input
+      <div className="+/">
+      <MicIcon />
+        {/* <InsertEmoticonIcon /> */}
+        <div  className="form_chat" onSubmit={handleSubmit}>
+          {/* <input
             onChange={handleChange}
             placeholder="Type a message"
             type="text"
             name="message"
             value={input.message}
-          />
+          /> */}
+          
+          <InputEmoji
+          name="input"
+              value={input.message}
+              onChange={setInput}
+              cleanOnEnter
+              onEnter={handleEnter}
+              placeholder="Type a message"
+            />
           <button
             // onClick={sendMessage}
             type="submit"
           >
             Send a message
           </button>
-        </form>
-        <MicIcon />
+          {/* <IconButton> */}
+         
+          {/* </IconButton> */}
+        </div>
+      
       </div>
     </div>
     </div>

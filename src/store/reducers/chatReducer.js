@@ -1,3 +1,4 @@
+//Action Types
 import * as actionTypes from "../action/types";
 
 const initialState = {
