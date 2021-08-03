@@ -2,24 +2,30 @@ import { useState } from "react";
 import ChatItem from "./ChatItem";
 import Searchbar from "./Searchbar";
 import { useSelector } from "react-redux";
-const ChatList = ({handleClick}) => {
+import { SearchOutlined } from "@material-ui/icons";
+import "./Sidebar.css";
+const ChatList = ({ handleClick }) => {
   const [query, setQuery] = useState("");
   const chats = useSelector((state) => state.chats.chats);
-  // let filtered = chats
-  //   .filter((chat) => chat.name.toUpperCase().includes(query.toUpperCase()))
-   const chatList= chats.map((chat) => (
-      <ChatItem
-        chat={chat}
-        handleClick={handleClick}
-         key={chat.id}
-      />
-  
-    ));
+  let filteredChat = chats
+    .filter((chat) => chat.name.toUpperCase().includes(query.toUpperCase()))
+  let chatList = filteredChat.map((chat) => (
+    <ChatItem
+      chat={chat}
+      handleClick={handleClick}
+      key={chat.id}
+    />
+  ));
   return (
     <>
-    
-      <Searchbar setQuery={setQuery} />
-      <div addNewChat>{chatList }</div>
+      <div className="sidebar_search">
+        <div className="sidebar_searchContainer">
+          <SearchOutlined />
+          <Searchbar setQuery={setQuery} />
+        </div>
+      </div>
+
+      <div addNewChat>{chatList}</div>
 
     </>
   );

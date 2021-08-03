@@ -10,7 +10,9 @@ import {
   deleteMessage,
 } from "../../store/action/messageActions";
 import MessageItem from "./MessageItem";
-
+import Picker, { SKIN_TONE_MEDIUM_DARK } from 'emoji-picker-react';
+import InputEmoji from 'react-input-emoji'
+import InputEmojiWithRef from "react-input-emoji";
 function Chat({ filtered }) {
   const users = useSelector((state) => state.user.user);
   console.log(users);
@@ -25,6 +27,15 @@ function Chat({ filtered }) {
     timestamp: new Date().toISOString().slice(0, 10),
     chatId: id[0],
   });
+  //For Emoji
+  // const [chosenEmoji, setChosenEmoji] = useState(null);
+
+  // const onEmojiClick = (event, emojiObject) => {
+  //   setChosenEmoji(emojiObject);
+  // };
+
+  /********** */
+
 
   const dispatch = useDispatch();
 
@@ -37,6 +48,13 @@ function Chat({ filtered }) {
   //     dispatch(createMessage(input))
 
   // }
+  /////////////test emoji///////////////////
+  const [text, setText] = useState("");
+  function handleOnEnter(text) {
+    console.log('enter', text)
+  }
+
+  //////////////////////////////////////////
   const handleChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value });
   };
@@ -48,50 +66,89 @@ function Chat({ filtered }) {
   };
 
   return (
-    <div className="chat">
-      <div className="chat_header">
-        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
-        <div className="chat_headerInfo">
-          <h3>{filtered[0].name}</h3>
-          <p>Last Seen at ....</p>
+    <div className="cont">
+      <div className="chat">
+        <div className="chat_header">
+          <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+          <div className="chat_headerInfo">
+            <h3>{filtered[0].name}</h3>
+            <p>Last Seen at ....</p>
+          </div>
+          <div className="chat_headerRight">
+            <IconButton>
+              <SearchOutlined />
+            </IconButton>
+            <IconButton>
+              <AttachFile />
+            </IconButton>
+            <IconButton>
+              <MoreVert />
+            </IconButton>
+          </div>
         </div>
-        <div className="chat_headerRight">
-          <IconButton>
-            <SearchOutlined />
-          </IconButton>
-          <IconButton>
-            <AttachFile />
-          </IconButton>
-          <IconButton>
-            <MoreVert />
-          </IconButton>
+        <div className="body2">
+          <div className="chat_body">
+            {filtered.map((message) => (
+              <MessageItem message={message} key={message.id} />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="chat_body">
-        {filtered.map((message) => (
-          <MessageItem message={message} key={message.id} />
-        ))}
-      </div>
-      <div className="chat_footer">
-        <InsertEmoticonIcon />
-        <form onSubmit={handleSubmit}>
-          <input
-            onChange={handleChange}
-            placeholder="Type a message"
-            type="text"
-            name="message"
-            value={input.message}
-          />
-          <button
-            // onClick={sendMessage}
-            type="submit"
-          >
-            Send a message
-          </button>
-        </form>
-        <MicIcon />
+
+        <div className="chat_footer">
+          {/* <IconButton>
+            <MicIcon />
+          </IconButton> */}
+          <IconButton>
+            {/* <InsertEmoticonIcon /> */}
+            {/* {chosenEmoji ? (
+              <span>You chose: {chosenEmoji.emoji}</span>
+            ) : (
+              <span>No emoji Chosen</span>
+            )}
+            <Picker onEmojiClick={onEmojiClick} /> */}
+            {/* <InputEmoji
+              value={text}
+              onChange={setText}
+              cleanOnEnter
+              onEnter={handleOnEnter}
+              placeholder="Type a message"
+            /> */}
+          </IconButton>
+
+          <div className="for" onSubmit={handleSubmit}>
+            <IconButton>
+              <MicIcon />
+            </IconButton>
+            <InputEmoji
+              value={input.message}
+              onChange={setInput}
+              cleanOnEnter
+              onEnter={handleChange}
+              placeholder="Type a message"
+            />
+            {/* <input
+              onChange={handleChange}
+              placeholder="Type a message"
+              type="text"
+              name="message"
+              value={input.message}
+            /> */}
+
+            <button
+              // onClick={sendMessage}
+              type="submit"
+            >
+              Send a message
+            </button>
+          </div>
+          {/* <IconButton>
+            <MicIcon />
+          </IconButton> */}
+
+        </div>
       </div>
     </div>
+
   );
 }
 

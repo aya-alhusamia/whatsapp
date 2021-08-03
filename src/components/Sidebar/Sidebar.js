@@ -14,6 +14,7 @@ import Chat from "../Chat/Chat";
 
 import { createChat } from "../../store/action/chatActions";
 
+
 const Sidebar = () => {
   const [filtered, setFiltered] = useState([]);
   const [img, setImg] = useState("");
@@ -100,15 +101,16 @@ const Sidebar = () => {
             </IconButton>
             <IconButton>
               <MoreVertIcon />
+
             </IconButton>
           </div>
         </div>
-        <div className="sidebar_search">
+        {/* <div className="sidebar_search">
           <div className="sidebar_searchContainer">
             <SearchOutlined />
-            <input placeholder="Search or start new chat" type="text" />
+          
           </div>
-        </div>
+        </div> */}
         <div className="sidebar_chats">
           {/* <SidebarChat addNewChat /> */}
           <ChatList handleClick={handleClick} />
