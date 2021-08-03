@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector, useDispatch, } from "react-redux";
+import { useEffect, useState,useRef } from "react";
 
 //Components
 import { createMessage, fetchMessages } from "../../store/action/messageActions";
@@ -27,7 +27,9 @@ function Chat({ chatId }) {
     name: users?.username,
     received: true,
     timestamp: new Date().toISOString().slice(0, 10),
-
+ 
+    image: ""
+ 
   });
 
   const dispatch = useDispatch();
@@ -52,8 +54,10 @@ function Chat({ chatId }) {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const newMessage = { ...input, chatId: chatId }
+ 
+    event?.preventDefault();
+    const newMessage= {...input, chatId:chatId}
+ 
     dispatch(createMessage(newMessage));
     setInput({ ...input, message: "" });
     dispatch(fetchMessages())
@@ -61,6 +65,7 @@ function Chat({ chatId }) {
 
 
   };
+ 
   const handleEnter = () => {
     dispatch(createMessage({ input }))
     // setInput({...input,message:"message"})
@@ -96,6 +101,7 @@ function Chat({ chatId }) {
               <MoreVert onClick={() => alert("ليش الاحرااااااااااج 🐍")} />
             </IconButton>
           </div>
+ 
         </div>
         <div className="body2">
           <MessageList chatId={chatId} />
@@ -104,6 +110,7 @@ function Chat({ chatId }) {
           <MessageItem message={message} key={message.id} />
         ))}
       </div> */}
+ 
         </div>
         <div className="chat_footer">
           <InsertEmoticonIcon />
@@ -117,12 +124,17 @@ function Chat({ chatId }) {
             />
             {/* <InputEmoji
               name="input"
+ 
+      </div>
+   
+ 
               value={input.message}
               onChange={setInput}
               cleanOnEnter
               onEnter={handleEnter}
               placeholder="Type a message"
             /> */}
+ 
             <button
               // onClick={sendMessage}
               type="submit"
@@ -133,6 +145,7 @@ function Chat({ chatId }) {
           </form>
 
         </div>
+ 
       </div>
     </div>
   );
