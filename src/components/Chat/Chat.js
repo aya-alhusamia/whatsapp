@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector, useDispatch, } from "react-redux";
+import { useEffect, useState,useRef } from "react";
 
 //Components
 import {createMessage, fetchMessages} from "../../store/action/messageActions";
@@ -27,7 +27,7 @@ function Chat({  chatId }) {
     name: users?.username,
     received: true,
     timestamp: new Date().toISOString().slice(0, 10),
-    
+    image: ""
   });
  
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ function Chat({  chatId }) {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event?.preventDefault();
     const newMessage= {...input, chatId:chatId}
     dispatch(createMessage(newMessage));
     setInput({...input, message: ""});
@@ -66,8 +66,15 @@ dispatch(createMessage({input}))
   // setInput({...input,message:"message"})
 }
 const handleAttachment=(event)=>{
-dispatch(createMessage({...input,message:event.target.files[0]}))
+dispatch(createMessage({...input,image:event.target.files[0]}))
+handleSubmit()
 }
+const inputFile = useRef(null) 
+
+const onButtonClick = () => {
+  // `current` points to the mounted file input element
+ inputFile.current.click();
+};
   return (
     <div className= "cont">
     <div className="chat">
@@ -84,8 +91,8 @@ dispatch(createMessage({...input,message:event.target.files[0]}))
           <IconButton>
             <div  >
             <form onSubmit= {handleSubmit}>
-              <input  onChange={handleAttachment} type="file" name="image"   style={{display:"none"}}/>
-            <AttachFile  />
+            <AttachFile onClick={onButtonClick}/>
+            <input type='file' id='file' onChange={handleAttachment} ref={inputFile} style={{display: 'none'}}/>
             </form>
             </div>
           </IconButton>
@@ -102,36 +109,36 @@ dispatch(createMessage({...input,message:event.target.files[0]}))
         ))}
       </div> */}
       </div>
-      <div className="+/">
-      <MicIcon />
-        {/* <InsertEmoticonIcon /> */}
-        <div  className="form_chat" onSubmit={handleSubmit}>
-          {/* <input
+      <div className="chat_footer">
+     
+        <InsertEmoticonIcon />
+        <form   onSubmit={handleSubmit}>
+          <input
             onChange={handleChange}
             placeholder="Type a message"
             type="text"
             name="message"
             value={input.message}
-          /> */}
+          />
           
-          <InputEmoji
+          {/* <InputEmoji
           name="input"
               value={input.message}
               onChange={setInput}
               cleanOnEnter
               onEnter={handleEnter}
               placeholder="Type a message"
-            />
+            /> */}
           <button
             // onClick={sendMessage}
             type="submit"
           >
             Send a message
-          </button>
-          {/* <IconButton> */}
-         
-          {/* </IconButton> */}
-        </div>
+          </button> 
+          <IconButton>
+          <MicIcon />
+          </IconButton>
+        </form>
       
       </div>
     </div>
