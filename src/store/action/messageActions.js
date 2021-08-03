@@ -23,7 +23,7 @@ export const createMessage = (input, chatId) => {
       const formData = new FormData();
       for (const key in input) formData.append(key, input[key]);
       const res = await instance.post(
-        // `http://localhost:8000/chats/${chatId}/message`,
+      
         "/messages",
         formData
       );
@@ -45,22 +45,9 @@ export const fetchMessages = () => {
         type: actionTypes.FETCH_MESSAGE,
         payload: res.data,
       });
-      console.log("fetch message" , res.data)
+    
     } catch (error) {
       console.log(error);
     }
   };
 };
-// export const fetchFilteredMessages = () => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await instance.get(`/messages/${chatId}`);
-//       dispatch({
-//         type: actionTypes.FETCH_FILTERED_MESSAGE,
-//         payload: res.data,
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };

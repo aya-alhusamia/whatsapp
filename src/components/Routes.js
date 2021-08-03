@@ -1,11 +1,8 @@
-//components
-// import MessageList from "./Message/MessageList";
-// import ChatList from "./Chat/ChatList";
-// import ChatDetail from "./Chat/ChatDetail";
-import SignUp from "./Authencation/Signup";
-import SignIn from "./Authencation/Signin";
-
 import { Route, Switch } from "react-router";
+
+//components
+import SignUp from "./Authentication/Signup";
+import SignIn from "./Authentication/Signin";
 import Sidebar from "./Sidebar/Sidebar";
 import MessageList from "./Chat/MessageList";
 
@@ -15,9 +12,6 @@ function Routes() {
       <Route path="/signup">
         <SignUp />
       </Route>
-      {/* <Route path="/chats/:chatId">
-        <ChatDetail />
-      </Route> */}
       <Route path="/messages">
         <MessageList />
       </Route>

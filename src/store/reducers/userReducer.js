@@ -1,4 +1,6 @@
+//Action Types
 import * as actionType from "../action/types";
+
 const initialState = {
   user: null,
   allUsers: [],

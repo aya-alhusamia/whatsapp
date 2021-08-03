@@ -1,13 +1,18 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+//Components
 import ChatItem from "./ChatItem";
 import Searchbar from "./Searchbar";
-import { useSelector } from "react-redux";
+//Styling
+import { SearchOutlined } from "@material-ui/icons";
+import "./Sidebar.css";
+
 const ChatList = ({handleClick}) => {
   const [query, setQuery] = useState("");
   const chats = useSelector((state) => state.chats.chats);
-  // let filtered = chats
-  //   .filter((chat) => chat.name.toUpperCase().includes(query.toUpperCase()))
-   const chatList= chats.map((chat) => (
+  let filteredChat = chats
+    .filter((chat) => chat.name?.toUpperCase().includes(query?.toUpperCase()))
+   let chatList= filteredChat.map((chat) => (
       <ChatItem
         chat={chat}
         handleClick={handleClick}
@@ -16,12 +21,16 @@ const ChatList = ({handleClick}) => {
   
     ));
   return (
-    <>
-    
-      <Searchbar setQuery={setQuery} />
+    <div>
+    <div className="sidebar_search">
+        <div className="sidebar_searchContainer">
+          <SearchOutlined />
+          <Searchbar setQuery={setQuery} />
+        </div>
+      </div>
       <div addNewChat>{chatList }</div>
-
-    </>
+      </div>
+    
   );
 };
 

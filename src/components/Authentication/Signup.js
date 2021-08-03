@@ -1,12 +1,15 @@
-
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+//Components
+import { signup } from "../../store/action/userActions";
+
+//Styling
 import { AiFillEye, AiFillPhone } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
 import { UserForm } from "../../styles";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { signup } from "../../store/action/userActions";
+
 const SignUp = () => {
   const history = useHistory();
   const dispatch = useDispatch();
