@@ -14,7 +14,9 @@ const MessageItem = ({ message }) => {
       <p className={`chat_message ${message.received && "chat_receiver"}`}>
         <span className="chat_name">{message.name}</span>
         {message.message}
+        <span className="chat_name">{message.image}</span>
         <span className="chat_timestamp">{message.timestamp}</span>
+
         <IconButton onClick={() => dispatch(deleteMessage(message.id))}>
           <DeleteSweepIcon />{" "}
         </IconButton>

@@ -80,12 +80,12 @@
     border-top: 1px solid lightgrey;
 }
 
-.form_chat {
+.chat_footer >form {
     flex: 1;
     display: flex;
 }
 
-.form_chat > .react-input-emoji--input {
+.chat_footer >form > input {
     flex: 1;
     outline-width: 0;
     border-radius: 30px;
@@ -93,7 +93,7 @@
     border: none;
 }
 
-.form_chat > button{
+.chat_footer >form > button{
     display: none;
 }
 /* 
