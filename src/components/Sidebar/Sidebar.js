@@ -11,20 +11,23 @@ import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Button, Modal, Form } from "react-bootstrap";
-import "./Sidebar.css";
+import "./Sidebar.scss";
 
 //Action
 import { createChat, fetchChats } from "../../store/action/chatActions";
 
 //Form
 import Select from "react-select";
-
+//Voic
+import { Howl } from "howler";
+import win from "../../Audio/win.mp3";
+import win2 from "../../Audio/win2.mp3";
 const Sidebar = () => {
   //UseState
   const [img, setImg] = useState("");
-  const [chatId, setChatId] = useState(chats[0].id);
   const [show, setShow] = useState(false);
   const [users, setUsers] = useState([]);
+
   const [newChat, setNewChat] = useState({
     name: "",
     image: "",
@@ -38,7 +41,7 @@ const Sidebar = () => {
   const handleClick = (id) => {
     setChatId(id);
   };
-
+  const [chatId, setChatId] = useState(chats[0].id);
   const _allUsers = _users.map((user) => {
     return { value: user.id, label: user.username };
   });
@@ -82,20 +85,31 @@ const Sidebar = () => {
     });
   };
 
+  const [seed, setSeed] = useState("");
+  useEffect(() => {
+    setSeed(Math.floor(Math.random() * 5000));
+  }, []);
+
+  let sound = win;
+  let sound2 = win2;
+  const SondPlay = (src) => {
+    const s = new Howl({ src });
+    s.play();
+  }
   return (
     <div className="sidebar_container">
       <div className="sidebar_rabber">
         <div className="sidebar_header">
-          <Avatar />
+          <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
           <div className="sidebar_headerRight">
-            <IconButton>
+            <IconButton onClick={() => SondPlay(sound)}>
               <DonutLargeIcon />
             </IconButton>
             <IconButton onClick={handleShow}>
               <ChatIcon />
             </IconButton>
             <IconButton>
-              <MoreVertIcon />
+              <MoreVertIcon onClick={() => SondPlay(sound2)} />
             </IconButton>
           </div>
         </div>

@@ -5,10 +5,16 @@
 }
 
 .chat_header{
-    padding: 20px;
+    padding: 10px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid lightgray;
+}
+
+.chat_header > img{
+    height: 100px;
+    width: 100px;
+    border-radius: 60%;
 }
 
 .chat_headerInfo{
@@ -80,12 +86,12 @@
     border-top: 1px solid lightgrey;
 }
 
-.form_chat {
+.chat_footer > form {
     flex: 1;
     display: flex;
 }
 
-.form_chat > .react-input-emoji--input {
+.chat_footer > form >input {
     flex: 1;
     outline-width: 0;
     border-radius: 30px;
@@ -93,11 +99,11 @@
     border: none;
 }
 
-.form_chat > button{
+.chat_footer > form > button{
     display: none;
 }
-/* 
+
 .chat_footer > .MuiSvgIcon-root{
-    padding: 10px;
+   
     color: gray;
-} */
+}

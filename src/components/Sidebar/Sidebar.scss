@@ -38,7 +38,9 @@
   background-color: #f6f6f6;
   height: 39px;
   padding: 10px;
+
 }
+
 
 .sidebar_searchContainer {
   display: flex;
@@ -61,7 +63,8 @@
  
 
 .sidebar_chats {
-  flex:0.85;
+  /* flex:0.99; */
+  height:calc(90vh - 90px);
   background-color: white;
   overflow: auto;
 }
