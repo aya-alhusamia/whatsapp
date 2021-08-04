@@ -1,7 +1,7 @@
 import instance from "./instance";
 import * as actionTypes from "./types";
 
-export const deleteMessage = ( messageId) => {
+export const deleteMessage = (messageId) => {
   return async (dispatch) => {
     try {
       await instance.delete(`/messages/${messageId}`);
@@ -23,13 +23,13 @@ export const createMessage = (input, chatId) => {
       const formData = new FormData();
       for (const key in input) formData.append(key, input[key]);
       const res = await instance.post(
-      
+
         "/messages",
         formData
       );
       dispatch({
         type: actionTypes.CREATE_MESSAGE,
-        payload: { input: res.data },
+        payload: res.data,
       });
     } catch (error) {
       console.log(error);
@@ -45,7 +45,7 @@ export const fetchMessages = () => {
         type: actionTypes.FETCH_MESSAGE,
         payload: res.data,
       });
-    
+
     } catch (error) {
       console.log(error);
     }

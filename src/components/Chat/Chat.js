@@ -1,5 +1,5 @@
 import { useSelector, useDispatch, } from "react-redux";
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 //Components
 import { createMessage, fetchMessages } from "../../store/action/messageActions";
@@ -27,21 +27,26 @@ function Chat({ chatId }) {
     name: users?.username,
     received: true,
     timestamp: new Date().toISOString().slice(0, 10),
- 
+
     image: ""
- 
+
   });
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+
+  //   dispatch(fetchMessages()
+  //   )
+
+
+  // }, [input]);
   useEffect(() => {
-
-    dispatch(fetchMessages()
-    )
-
-
-  }, [input]);
-
+    const intervalID = setInterval(() => {
+      dispatch(fetchMessages())
+    }, 1000);
+    return () => clearInterval(intervalID);
+  }, []);
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
@@ -54,10 +59,10 @@ function Chat({ chatId }) {
   };
 
   const handleSubmit = (event) => {
- 
+
     event?.preventDefault();
-    const newMessage= {...input, chatId:chatId}
- 
+    const newMessage = { ...input, chatId: chatId }
+
     dispatch(createMessage(newMessage));
     setInput({ ...input, message: "" });
     dispatch(fetchMessages())
@@ -65,16 +70,27 @@ function Chat({ chatId }) {
 
 
   };
- 
+
   const handleEnter = () => {
     dispatch(createMessage({ input }))
     // setInput({...input,message:"message"})
   }
   //Avatar src/src={`https://avatars.dicebear.com/api/human/${seed}.svg`} / 
 
+
+  const inputFile = useRef(null)
   const handleAttachment = (event) => {
-    dispatch(createMessage({ ...input, message: event.target.files[0] }))
+    console.log(event.target.files);
+    dispatch(createMessage({ ...input, image: event.target.files[0], chatId }))
+
+    console.log(inputFile.current);
   }
+
+  const onButtonClick = () => {
+    // `current` points to the mounted file input element
+    inputFile.current.click();
+
+  };
   return (
     <div className="cont">
       <div className="chat">
@@ -92,8 +108,20 @@ function Chat({ chatId }) {
             <IconButton>
               <div  >
                 <form onSubmit={handleSubmit}>
-                  <AttachFile />
-                  <input onChange={handleAttachment} type="file" name="image" style={{ display: "none" }} />
+
+                  <label className="custom-file-upload">
+                    <input
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      type="file"
+                      onChange={(e) => {
+                        handleAttachment(e);
+                        e.target.value = null
+                      }}
+                    />
+                    <AttachFile />
+                  </label>
+
                 </form>
               </div>
             </IconButton>
@@ -101,7 +129,7 @@ function Chat({ chatId }) {
               <MoreVert onClick={() => alert("ليش الاحرااااااااااج 🐍")} />
             </IconButton>
           </div>
- 
+
         </div>
         <div className="body2">
           <MessageList chatId={chatId} />
@@ -110,7 +138,7 @@ function Chat({ chatId }) {
           <MessageItem message={message} key={message.id} />
         ))}
       </div> */}
- 
+
         </div>
         <div className="chat_footer">
           <InsertEmoticonIcon />
@@ -134,7 +162,7 @@ function Chat({ chatId }) {
               onEnter={handleEnter}
               placeholder="Type a message"
             /> */}
- 
+
             <button
               // onClick={sendMessage}
               type="submit"
@@ -145,7 +173,7 @@ function Chat({ chatId }) {
           </form>
 
         </div>
- 
+
       </div>
     </div>
   );

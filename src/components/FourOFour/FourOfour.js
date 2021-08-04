@@ -5,7 +5,7 @@ const FourOfour = () => {
     const { Anime, stagger } = ReactAnime
     return (
 
-        <div>
+        <div className="aa">
             <Anime initial={[
                 {
                     targets: '#zero',
