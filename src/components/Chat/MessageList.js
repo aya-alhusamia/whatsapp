@@ -6,7 +6,6 @@ import "./Chat.css";
 
 const MessageList = ({ chatId }) => {
   const messages = useSelector((state) => state.messages.messages);
-
   const messageList = messages
     .filter((message) => message.chatId === chatId)
     .map((message) => <MessageItem message={message} key={message.id} />);

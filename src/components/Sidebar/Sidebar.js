@@ -12,7 +12,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Button, Modal, Form } from "react-bootstrap";
 import "./Sidebar.scss";
-
+import aya from "../../assets/images/aya.jpeg"
 //Action
 import { createChat, fetchChats } from "../../store/action/chatActions";
 //Form
@@ -109,7 +109,8 @@ const Sidebar = () => {
     <div className="sidebar_container">
       <div className="sidebar_rabber">
         <div className="sidebar_header">
-          <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+          {/* <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} /> */}
+          <img src={aya} />
           <div className="sidebar_headerRight">
             <IconButton onClick={() => SondPlay(sound)}>
               <DonutLargeIcon />

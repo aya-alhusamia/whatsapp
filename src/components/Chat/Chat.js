@@ -32,6 +32,7 @@ function Chat({ chatId }) {
 
   });
 
+
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -91,6 +92,20 @@ function Chat({ chatId }) {
     inputFile.current.click();
 
   };
+  const [message, setMessage] = useState("");
+
+  function handleOnEnter(message) {
+    // setInput({ ...input, message: message });
+    const newMessage = { ...input, chatId: chatId, message }
+
+    dispatch(createMessage(newMessage));
+    setInput({ ...input, message: "" });
+    dispatch(fetchMessages())
+
+
+
+  }
+
   return (
     <div className="cont">
       <div className="chat">
@@ -141,36 +156,26 @@ function Chat({ chatId }) {
 
         </div>
         <div className="chat_footer">
-          <InsertEmoticonIcon />
-          <form onSubmit={handleSubmit}>
-            <input
-              onChange={handleChange}
-              placeholder="Type a message"
-              type="text"
+          {/* <InsertEmoticonIcon /> */}
+          <MicIcon />
+          <div className="chat_form" onSubmit={handleSubmit}>
+            <InputEmoji
               name="message"
-              value={input.message}
-            />
-            {/* <InputEmoji
-              name="input"
- 
-      </div>
-   
- 
-              value={input.message}
-              onChange={setInput}
+              type="text"
+              value={message}
+              onChange={setMessage}
               cleanOnEnter
-              onEnter={handleEnter}
+              onEnter={handleOnEnter}
               placeholder="Type a message"
-            /> */}
-
+            />
             <button
               // onClick={sendMessage}
               type="submit"
             >
               Send a message
             </button>
-            <MicIcon />
-          </form>
+
+          </div>
 
         </div>
 
